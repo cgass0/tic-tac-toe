@@ -12,7 +12,7 @@ body {
     margin: 0;
 }
 * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Allerta Stencil', sans-serif;
 }
 
 .flex {
@@ -27,21 +27,42 @@ body {
 #page-container {
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
     
 }
 
 #header {
     height: 100px;
+    font-size: 30px;
 }
 
 #main {
+    flex-direction: column;
     flex-grow: 1;
     align-items: center;
 }
 
+#symbolSelector {
+    width: 100vw;
+    gap: 20px;
+    padding: 25px;
+}
+
+.selector {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    font-size: 3vh;
+    text-align: center;
+}
+
+.selector:hover, .selector:active {
+    transform: scale(1.1);
+}
+
 #gameboard {
-    height: 60vh;
-    width: 60vh;
+    height: 55vh;
+    width: 55vh;
     grid-template-rows:repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
 }
@@ -52,34 +73,51 @@ body {
     margin: 5px;
     font-size: 10vh;
     align-items: center;
+    color: var(--light-mode-color-2);
+    background-color: var(--light-mode-color-1);
+    cursor: pointer;
 }
 
-.row1{
-    grid-row: 1/2;
-}
-
-.row2{
-    grid-row: 2/3;
-}
-
-.row3{
-    grid-row: 3/4;
-}
-
-.col1{
-    grid-column: 1/2;
-}
-
-.col2{
-    grid-column: 2/3;
-}
-
-.col3{
-    grid-column: 3/4;
+.cube:hover, .cube:active {
+    transform: scale(1.05);
 }
 
 #footer {
     height: 50px;
     background-color: black;
     color: white;
+}
+
+
+#winningMessageElement {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    z-index: 1;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    margin: 0;
+}
+
+#winningMessageElement.show {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+}
+
+#winningMessageElement>h1 {
+    color: var(--light-mode-color-1);
+    font-size: 70px;
+}
+
+#winningMessageElement>button {
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    cursor: pointer;
 }

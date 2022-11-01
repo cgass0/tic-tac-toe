@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
+    <script src="script2.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Allerta Stencil' rel='stylesheet'>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -19,17 +21,22 @@
 
         <div id="main" class="flex">
 
+            <div id="symbolSelector" class="flex">
+                <button id="X" class="selector">X</button>
+                <button id="O" class="selector">O</button>
+            </div>
+
             <div id="gameboard" class="grid">
 
-                <div class="row1 col1 diga1 cube flex">X</div>
-                <div class="row1 col2 cube flex">X</div>
-                <div class="row1 col3 diga2 cube flex">O</div>     
-                <div class="row2 col1 cube flex"></div>
-                <div class="row2 col2 diga1 diga2 cube flex"></div>
-                <div class="row2 col3 cube flex"></div>          
-                <div class="row3 col1 diga2 cube flex"></div>
-                <div class="row3 col2 cube flex"></div>
-                <div class="row3 col3 diga1 cube flex"></div>
+                <button id="0" class="row1 col1 diga1 cube flex"></button>
+                <button id="1" class="row1 col2 cube flex"></button>
+                <button id="2" class="row1 col3 diga2 cube flex"></button>     
+                <button id="3" class="row2 col1 cube flex"></button>
+                <button id="4" class="row2 col2 diga1 diga2 cube flex"></button>
+                <button id="5" class="row2 col3 cube flex"></button>          
+                <button id="6" class="row3 col1 diga2 cube flex"></button>
+                <button id="7" class="row3 col2 cube flex"></button>
+                <button id="8" class="row3 col3 diga1 cube flex"></button>
                 
             </div>
         </div>
@@ -40,6 +47,11 @@
             </div>
         </div>
 
+    </div>
+
+    <div id="winningMessageElement">
+        <h1 id="winningMessageTextElement"></h1>
+        <button id="restartButton">Restart</button>
     </div>
     
 </body>
