@@ -11,6 +11,7 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
+<!--Game Screen-->
     <div id="page-container" class="flex">
 
         <div id="header" class="flex">
@@ -20,11 +21,6 @@
         </div>
 
         <div id="main" class="flex">
-
-            <div id="symbolSelector" class="flex">
-                <button id="X" class="selector">X</button>
-                <button id="O" class="selector">O</button>
-            </div>
 
             <div id="gameboard" class="grid">
 
@@ -49,10 +45,73 @@
 
     </div>
 
+<!--Winner Screen-->
     <div id="winningMessageElement">
         <h1 id="winningMessageTextElement"></h1>
         <button id="restartButton">Restart</button>
     </div>
-    
+
+
+<!--Form Screen-->
+
+    <div id="initialForm">
+
+        <div id="initialFormTitle">
+            <h1>Tic-Tac-Toe</h1>
+            <h2>Player Selection</h3>
+        </div>
+
+        <div id="player1" class="formBox">
+            <div class="playerTitle formBox-item">Player 1: X</div>
+            <div #playerType1 class="playerType formBox-item">
+                <label for="playerType">Player Type:</label>
+                <select name="types">
+                    <option value="human">Human</option>
+                    <option value="ai">AI</option>
+                </select>
+            </div>
+            <div #playerName1 class="playerName formBox-item">
+                <label for="playerName">Player Name:</label>
+                <input type="text" value="">
+            </div>
+            <div #aiDifficulty1 class="aiDifficulty formBox-item">
+                <label for="aiDifficulty">AI Difficulty:</label>
+                <select name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div id="vs">
+            <h1 id="vs">VS</h1>
+        </div>
+
+        <div id="player2" class="formBox">
+            <div class="playerTitle formBox-item">Player 2: O</div>
+            <div #playerType2 class="playerType formBox-item">
+                <label for="playerType">Player Type:</label>
+                <select name="types">
+                    <option value="human">Human</option>
+                    <option value="ai">AI</option>
+                </select>
+            </div>
+            <div #playerName2 class="playerName formBox-item">
+                <label for="playerName">Player Name:</label>
+                <input type="text" value="">
+            </div>
+            <div #aiDifficulty1 class="aiDifficulty formBox-item">
+                <label for="aiDifficulty">AI Difficulty:</label>
+                <select name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+
+        <button>Start</button>
+
+    </div>
 </body>
 </html>
