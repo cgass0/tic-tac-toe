@@ -44,22 +44,10 @@ body {
     align-items: center;
 }
 
-#symbolSelector {
-    width: 100vw;
-    gap: 20px;
-    padding: 25px;
-}
-
-.selector {
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
-    font-size: 3vh;
-    text-align: center;
-}
-
-.selector:hover, .selector:active {
-    transform: scale(1.1);
+#currentPlayerDisplay {
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 15px;
 }
 
 #gameboard {
@@ -143,7 +131,7 @@ body {
     margin: 0;
 }
 
-#initialForm {
+#initialForm.show {
     display: grid;
     grid-template-rows: 10vh 30vh 10vh 20vh 20vh;
     width: 100%;
@@ -152,7 +140,8 @@ body {
 
 .formBox {
     border: 2px solid var(--light-mode-color-2);
-    height: 15vh;
+    height: 16vh;
+    min-height: 125px;
     padding: 10px
 }
 
@@ -167,6 +156,7 @@ body {
 .playerTitle {
     font-weight: 700;
     font-size: 20px;
+    text-align: center;
 }
 
 #initialFormTitle {

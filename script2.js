@@ -1,9 +1,9 @@
 
 // Setting up the gameboard module
-let gameBoardModule = (function() { // calls a local anonymos function
-    let gameBoard = []; // calls gameboard as empty array
-    return {}; 
-})();
+//let gameBoardModule = (function() { // calls a local anonymos function
+   // let gameBoard = []; // calls gameboard as empty array
+   // return {}; 
+//})();
 
 
 // Setting up the displayController module

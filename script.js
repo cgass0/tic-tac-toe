@@ -11,139 +11,143 @@ function switchTheme(e) {
 }
 toggleSwitch.addEventListener('change', switchTheme, false);
 
-
 */
 
+// Finds if start screen is showing and toggles on/off
+const startScreenToggle = function() {
+    const initialFormScreen = document.getElementById('initialForm');
+    const state = initialFormScreen.classList.contains('show') ? true : false;
+    if (state === true) {
+        initialFormScreen.classList.remove('show');
+    } else {
+        initialFormScreen.classList.add('show');
+    }
+};
 
-// Cube Click Max Once
-const cubes = document.querySelectorAll('.cube');
-const gameBoard = document.getElementById('gameboard');
-const selectors = document.querySelectorAll('.selector');
-
-const winningMessageElement = document.getElementById('winningMessageElement');
-const winningMessageTextElement = document.getElementById('winningMessageTextElement');
-const restartButton = document.getElementById('restartButton');
-
-const X_CLASS = "x";
-const CIRCLE_CLASS = "circle";
-let circleTurn;
+// Toggle winning screen
+const winningScreenToggle = function() {
+    const winScreen = document.getElementById('winningMessageElement');
+    const state = winScreen.classList.contains('show') ? true : false;
+    if (state === true) {
+        winScreen.classList.remove('show');
+    } else {
+        winScreen.classList.add('show');
+    }
+};
 
 
-const WINNING_COMBINATIONS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,7]
+// Array for player information
+let players = [];
+// Player constructor
+function Player(Type, Name, Difficulty) {
+    this.Type = Type;
+    this.Name = Name;
+    this.Difficulty = Difficulty;
+}
+// Pushing new players to array
+function pushPlayers(Type, Name, Difficulty) {
+    let player = new Player(Type, Name, Difficulty);
+    players.push(player);
+}
+
+
+// Collect player info from forms and call push function
+const getPlayerInfo = function() {
+    // Store the two form boxes
+    const addPlayers = document.querySelectorAll('.formBox');
+    // Index for which player 1 || 2
+    index = 1;
+    // For each loop to push both player forms
+    addPlayers.forEach(player => {
+        Type = player.querySelector('[name="types"]').value;
+        // Added if incase names left blank
+        if (player.querySelector('[name="name"]').value === "" && Type === "human") {
+            Name = ("Player " + index)
+        } else if (player.querySelector('[name="name"]').value === "" && Type === "ai") {
+            Name = ("Robot " + index)
+        } else {
+            Name = player.querySelector('[name="name"]').value
+        }
+        
+        Difficulty = player.querySelector('[name="difficulty"]').value;
+
+        pushPlayers(Type, Name, Difficulty);
+        index++;
+    });
+}
+
+// Get Symbol based on number of filled cubes
+const getSymbol = filledCubes => (filledCubes % 2) == 0 ? "X" : "O"; 
+// Gets players name based on number of filled cubes
+const currentPlayer = filledCubes => players[filledCubes % 2].Name;
+// What message to display based on players turn
+const displayCurrentPlayer = function(currentPlayer, symbol) {
+    let turn = document.getElementById('currentPlayerDisplay');
+    turn.textContent = `It is currently ${currentPlayer}'s turn: ${symbol}`;
+};
+
+
+// Game 
+const startGame = (() => {
+    startScreenToggle();
+    getPlayerInfo();
+    let filledCubes = 0;
+    displayCurrentPlayer(currentPlayer(filledCubes), getSymbol(filledCubes));
+
+    const cubes = document.querySelectorAll('.cube');
+    cubes.forEach(cube => { 
+        cube.addEventListener('click', e => {
+            // add symbol to cubes inner text
+            e.target.textContent = getSymbol(filledCubes);
+            // Disables cube from being re-clicked
+            e.target.disabled = true;
+            // fill gameBoard with symbol from cubes ID number
+            gameBoard[e.target.id] = getSymbol(filledCubes);
+            // Check for winner
+            if (checkWin(getSymbol(filledCubes))) {
+                console.log("winner");
+            }
+            // add to the filled cube counter
+            filledCubes++;
+            // displays next players turn
+            displayCurrentPlayer(currentPlayer(filledCubes), getSymbol(filledCubes));
+        })
+    });
+
+});
+
+
+// Array of arrays for the winning combinations based on gameboard index
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
 ];
 
 
-// Event handler for restart button on winning screen to restart game
-restartButton.addEventListener('click', resetGame);
-
-
-
-selectors.forEach(selector => {
-    selector.addEventListener('click', symbolClick, {once: true});
-})
-
-function symbolClick(e) {
-    selectedSymbol = e.target.id;
-    startGame(selectedSymbol);
-}
+// Create gameboard
+let gameBoard = [];
+const cubes = document.querySelectorAll('.cube');
+cubes.forEach(cube => { 
+    gameBoard.push(cube.value);
+});
     
-
-
-// Upon cube or restart button click, the game restarts and begins
-function startGame() {
-    circleTurn = false;// based on selection
-
-    selectors.disabled = true;
-
-    cubes.forEach(cell => {
-        cell.addEventListener('click', handleClick, {once: true});
-    })
-} 
-
-
-// Upon a cube click, the following happens
-function handleClick(e) {
-    
-    // Place mark
-    const cell = e.target;
-    const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-    placeMark(cell, currentClass);
-
-    if (checkWin(currentClass)) {
-
-        // Check for win
-        endGame(false);
-
-    } else if (isDraw()) {
-
-        // Check for Draw
-        endGame(true);
-
-    } else {
-
-        // Switch turns
-        swapTurns();
-    }
-
-    resetGame();
-
-}
-
-
-// When triggered, endgame searchs for winner or draw and displays winning screen
-function endGame(draw) {
-    if(draw) {
-        winningMessageTextElement.innerText = "Draw!";
-    } else {
-        winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
-    }
-    winningMessageElement.classList.add('show');
-}
-
-
-// Function to add the x or circle class to cubes
-function placeMark(cell, currentClass) {
-    cell.classList.add(currentClass);
-}
-
-
-// Searchs for all cubes to be filled, then triggers a draw
-function isDraw() {
-    return [...cubes].every(cell => {
-        return cell.classList.contains(X_CLASS) || cell.classList.contains(CIRCLE_CLASS);
-    })
-}
-
-
-// If circleTurn is true, then becomes not circleturn
-function swapTurns() {
-    circleTurn = !circleTurn;
-}
-
-
-// triggered function after every click that searchs for a winner based array of possible outcomes
-function checkWin(currentClass) {
-    return WINNING_COMBINATIONS.some(combination => {
-        return combination.every(index => {
-            return cubes[index].classList.contains(currentClass);
+function checkWin(symbol) {
+    return winningConditions.some(combinations => {
+        return combinations.every(index => {
+            return cubes[index] == symbol;
         })
     })
 }
 
+// Brings up start screen 
+startScreenToggle();
 
-// Restart game, reset 
-function resetGame() {
-    winningMessageElement.classList.remove('show');
-    cell.classList.remove('X_CLASS');
-    cell.classList.remove('CIRCLE_CLASS');
-    cell.removeEventListener('click', handleClick);
-    cell.removeEventListener('click', symbolClick);
-}
+// Start Game after info input
+const startButton = document.getElementById('startButton');
+startButton.addEventListener('click', startGame);

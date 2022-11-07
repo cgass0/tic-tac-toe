@@ -21,9 +21,9 @@
         </div>
 
         <div id="main" class="flex">
+            <div id="currentPlayerDisplay"></div>
 
             <div id="gameboard" class="grid">
-
                 <button id="0" class="row1 col1 diga1 cube flex"></button>
                 <button id="1" class="row1 col2 cube flex"></button>
                 <button id="2" class="row1 col3 diga2 cube flex"></button>     
@@ -32,8 +32,7 @@
                 <button id="5" class="row2 col3 cube flex"></button>          
                 <button id="6" class="row3 col1 diga2 cube flex"></button>
                 <button id="7" class="row3 col2 cube flex"></button>
-                <button id="8" class="row3 col3 diga1 cube flex"></button>
-                
+                <button id="8" class="row3 col3 diga1 cube flex"></button>   
             </div>
         </div>
 
@@ -63,20 +62,20 @@
 
         <div id="player1" class="formBox">
             <div class="playerTitle formBox-item">Player 1: X</div>
-            <div #playerType1 class="playerType formBox-item">
+            <div class="playerType formBox-item">
                 <label for="playerType">Player Type:</label>
-                <select name="types">
+                <select id="player1Type" name="types">
                     <option value="human">Human</option>
                     <option value="ai">AI</option>
                 </select>
             </div>
-            <div #playerName1 class="playerName formBox-item">
+            <div class="playerName formBox-item">
                 <label for="playerName">Player Name:</label>
-                <input type="text" value="">
+                <input id="player1Name" name="name" type="text">
             </div>
-            <div #aiDifficulty1 class="aiDifficulty formBox-item">
+            <div class="aiDifficulty formBox-item">
                 <label for="aiDifficulty">AI Difficulty:</label>
-                <select name="difficulty">
+                <select id="ai1Difficulty" name="difficulty">
                     <option value="easy">Easy</option>
                     <option value="hard">Hard</option>
                 </select>
@@ -90,27 +89,27 @@
 
         <div id="player2" class="formBox">
             <div class="playerTitle formBox-item">Player 2: O</div>
-            <div #playerType2 class="playerType formBox-item">
+            <div class="playerType formBox-item">
                 <label for="playerType">Player Type:</label>
-                <select name="types">
+                <select id="player2Type" name="types">
                     <option value="human">Human</option>
                     <option value="ai">AI</option>
                 </select>
             </div>
-            <div #playerName2 class="playerName formBox-item">
+            <div class="playerName formBox-item">
                 <label for="playerName">Player Name:</label>
-                <input type="text" value="">
+                <input id="player2Name" name="name" type="text">
             </div>
-            <div #aiDifficulty1 class="aiDifficulty formBox-item">
+            <div class="aiDifficulty formBox-item">
                 <label for="aiDifficulty">AI Difficulty:</label>
-                <select name="difficulty">
+                <select id="ai2Difficulty" name="difficulty">
                     <option value="easy">Easy</option>
                     <option value="hard">Hard</option>
                 </select>
             </div>
         </div>
 
-        <button>Start</button>
+        <button id="startButton">Start</button>
 
     </div>
 </body>
